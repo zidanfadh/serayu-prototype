@@ -1,4 +1,6 @@
 'use client';
+//biar bisa deploy
+
 
 import { useEffect, useState } from 'react';
 import { Product } from '@/lib/data';
