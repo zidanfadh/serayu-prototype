@@ -80,7 +80,7 @@ export function CreatePOForm() {
       localStorage.setItem('productionPlans', JSON.stringify(updatedPlans))
     }
 
-    router.push('/po')
+    router.push('/production-plans')
   }
 
   return (

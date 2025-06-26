@@ -73,7 +73,7 @@ export function WorkOrderCreateForm() {
       localStorage.setItem('productionPlans', JSON.stringify(updatedPlans));
     }
 
-    router.push('/work-orders');
+    router.push('/production-plans');
   };
 
   return (
