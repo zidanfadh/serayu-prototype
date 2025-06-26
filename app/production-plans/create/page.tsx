@@ -1,4 +1,5 @@
 'use client';
+//biar bisa deploy
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
