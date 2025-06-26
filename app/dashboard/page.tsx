@@ -17,6 +17,8 @@
 //   )
 // }
 
+//biar bisa deploy
+
 'use client';
 
 import { useEffect, useState } from 'react';
