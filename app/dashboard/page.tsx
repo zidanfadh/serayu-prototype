@@ -162,7 +162,7 @@ export default function Dashboard() {
   return (
     <div className="p-6">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-3xl font-bold">Dashboard</h1>
         <p className="text-gray-600">Welcome to Serayu ERP System</p>
       </div>
 
@@ -177,8 +177,8 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                  <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-sm font-medium">{stat.title}</p>
+                  <p className="text-3xl font-bold">{stat.value}</p>
                 </div>
                 <div className={`p-3 rounded-full ${stat.bgColor}`}>
                   <stat.icon className={`h-6 w-6 ${stat.color}`} />
@@ -197,11 +197,11 @@ export default function Dashboard() {
             <Card key={action.title} className="cursor-pointer hover:shadow-md transition-shadow">
               <CardContent className="p-4">
                 <div className="flex items-start space-x-3">
-                  <div className={`p-2 rounded-lg ${action.color} text-white`}>
+                  <div className={`p-2 rounded-lg ${action.color}`}>
                     <action.icon className="h-5 w-5" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-gray-900">{action.title}</h3>
+                    <h3 className="font-medium">{action.title}</h3>
                     <p className="text-sm text-gray-600">{action.description}</p>
                     <Button 
                       variant="outline" 
@@ -231,19 +231,19 @@ export default function Dashboard() {
           <CardContent>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Total Production Plans</span>
+                <span className="text-sm">Total Production Plans</span>
                 <span className="font-medium">{stats.productionPlans}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Active Work Orders</span>
+                <span className="text-sm">Active Work Orders</span>
                 <span className="font-medium">{stats.workOrders}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Scheduled Plans</span>
+                <span className="text-sm">Scheduled Plans</span>
                 <span className="font-medium">{stats.workOrderPlans}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Generated Reports</span>
+                <span className="text-sm">Generated Reports</span>
                 <span className="font-medium">{stats.reports}</span>
               </div>
             </div>

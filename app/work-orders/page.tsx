@@ -168,7 +168,7 @@ export default function WorkOrdersPage() {
       <div className="container mx-auto py-10">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Work Orders</h1>
-          <Button onClick={() => router.push('/work-orders/create')}>
+          <Button className='cursor-pointer border-2 border-solid shadow-lg' onClick={() => router.push('/work-orders/create')}>
             Buat Work Order
           </Button>
         </div>

@@ -33,10 +33,10 @@ export default function ProductionPlansPage() {
   );
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Production Plans</h1>
-        <Button onClick={() => router.push('/production-plans/create')}>
+        <Button className='cursor-pointer border-2 border-solid shadow-lg' onClick={() => router.push('/production-plans/create')}>
           Buat Production Plan
         </Button>
       </div>
