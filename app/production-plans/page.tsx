@@ -88,6 +88,13 @@ export default function ProductionPlansPage() {
                       onClick={() => router.push(`/work-orders/create?production_plan_id=${plan.id}`)}>
                       Buat WO
                     </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => router.push(`/work-order-plans/create?production_plan_id=${plan.id}`)}
+                    >
+                      Buat Plan
+                    </Button>
                   </div>
                 </TableCell>
               </TableRow>

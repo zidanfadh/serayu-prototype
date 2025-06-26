@@ -114,13 +114,6 @@ export default function WorkOrdersPage() {
           >
             Detail
           </Button>
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={() => router.push(`/work-order-plans/create?production_plan_id=${row.original.production_plan_id}`)}
-          >
-            Buat Plan
-          </Button>
         </div>
       ),
     },

@@ -21,11 +21,11 @@ import { usePathname } from 'next/navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: Home },
-  { name: 'Production Plans', href: '/production-plans', icon: Building },
+  { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Products', href: '/products', icon: Package },
-  { name: 'Purchase Orders', href: '/po', icon: FileText },
-  { name: 'Work Orders', href: '/work-orders', icon: ClipboardList },
+  { name: 'Production Plans', href: '/production-plans', icon: Building },
+  // { name: 'Purchase Orders', href: '/po', icon: FileText },
+  // { name: 'Work Orders', href: '/work-orders', icon: ClipboardList },
   { name: 'Work Order Plans', href: '/work-order-plans', icon: Calendar },
   { name: 'Reports', href: '/work-order-reports', icon: BarChart3 },
 ]
