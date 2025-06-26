@@ -119,7 +119,7 @@ const columns: ColumnDef<Item>[] = [
     {
         accessorKey: 'jumlahRanjang',
         header: 'Jumlah Ranjang',
-        cell: ({ row }) => <div>{row.getValue("jumlahRanjang")} ranjang</div>,
+        cell: ({ row }) => <div>{row.getValue("jumlahRanjang")} rajang</div>,
     },
     {
         accessorKey: 'beratTotalKg',
