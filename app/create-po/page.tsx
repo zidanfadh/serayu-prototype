@@ -20,7 +20,7 @@ export default function CreatePOPage() {
     const { name, value } = e.target;
     setForm({
       ...form,
-      [name]: name === 'jumlahRanjang' || name === 'beratTotalKg' ? Number(value) : value,
+      [name]: name === 'jumlahRajang' || name === 'beratTotalKg' ? Number(value) : value,
     });
   };
 
@@ -66,8 +66,8 @@ export default function CreatePOPage() {
             </div>
 
             <div>
-              <Label htmlFor="jumlahRanjang" className="text-sm font-medium text-foreground">
-                Jumlah Ranjang
+              <Label htmlFor="jumlahRajang" className="text-sm font-medium text-foreground">
+                Jumlah Rajang
               </Label>
               <Input
                 type="number"
