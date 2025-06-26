@@ -2,13 +2,14 @@
 //biar bisa deploy
 
 
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Product } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     const loadProduct = () => {
       try {
         const productList = JSON.parse(localStorage.getItem('productList') || '[]');
-        const foundProduct = productList.find((p: Product) => p.KODE_PART === params.id);
+        const foundProduct = productList.find((p: Product) => p.KODE_PART === id);
         
         if (foundProduct) {
           setProduct(foundProduct);
@@ -31,7 +32,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     };
 
     loadProduct();
-  }, [params.id]);
+  }, [id]);
 
   if (loading) {
     return (
@@ -57,7 +58,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         </Button>
         <div className="bg-muted p-6 rounded-md text-center">
           <h1 className="text-xl font-semibold mb-4">Produk tidak ditemukan</h1>
-          <p>Produk dengan kode {params.id} tidak tersedia.</p>
+          <p>Produk dengan kode {id} tidak tersedia.</p>
         </div>
       </div>
     );
