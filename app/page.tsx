@@ -17,7 +17,12 @@ import {
 import { GlowCard } from '@/components/ui/magic-card';
 import { DefaultDemo } from '@/components/ui/dashboard-word';
 
-export default function Dashboard() {
+export const metadata = {
+  title: 'Serayu ERP',
+  description: 'Prototype for Serayu ERP System',
+};
+
+export default function Home() {
   const router = useRouter();
   const [stats, setStats] = useState({
     productionPlans: 0,
