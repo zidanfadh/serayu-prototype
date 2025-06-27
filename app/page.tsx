@@ -14,7 +14,7 @@ import {
   TrendingUp,
   AlertTriangle 
 } from 'lucide-react';
-import { MagicCard } from '@/components/ui/magic-card';
+import { GlowCard } from '@/components/ui/magic-card';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -154,8 +154,8 @@ export default function Dashboard() {
       className="cursor-pointer transition-shadow shadow-lg hover:shadow-md"
       onClick={() => router.push(stat.href)}
     >
-      <MagicCard gradientColor={typeof window !== "undefined" && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "#262626" : "#D9D9D955"}
-        className="p-0">
+      <GlowCard
+        className="p-0 w-full max-h-40 rounded-lg overflow-hidden">
         <div className="p-6">
           <div className="flex items-center justify-between">
             <div>
@@ -167,7 +167,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-      </MagicCard>
+      </GlowCard>
     </div>
   ))}
 </div>
