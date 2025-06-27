@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -15,6 +15,7 @@ import {
   AlertTriangle 
 } from 'lucide-react';
 import { GlowCard } from '@/components/ui/magic-card';
+import { DefaultDemo } from '@/components/ui/dashboard-word';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -26,6 +27,15 @@ export default function Dashboard() {
     workOrderPlans: 0,
     reports: 0,
   });
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === "left" ? -300 : 300;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     // Load statistics from localStorage
@@ -141,39 +151,63 @@ export default function Dashboard() {
 
   return (
     <div className="p-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-gray-600">Welcome to Serayu ERP System</p>
+      <div className="py-10 mb-6 text-center">
+        <DefaultDemo/>
+        <p className="text-gray-600 mt-6">Welcome to Serayu ERP System</p>
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-  {statsCards.map((stat) => (
-    <div
-      key={stat.title}
-      className="cursor-pointer transition-shadow shadow-lg hover:shadow-md"
-      onClick={() => router.push(stat.href)}
-    >
-      <GlowCard
-        className="p-0 w-full max-h-40 rounded-lg overflow-hidden">
-        <div className="p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium">{stat.title}</p>
-              <p className="text-3xl font-bold">{stat.value}</p>
-            </div>
-            <div className={`p-3 rounded-full ${stat.bgColor}`}>
-              <stat.icon className={`h-6 w-6 ${stat.color}`} />
+      <div>
+  {/* Card container */}
+  <div
+    ref={scrollRef}
+    className="flex gap-4 overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 mb-4 pb-10 scroll-smooth"
+  >
+    {statsCards.map((stat) => (
+      <div
+        key={stat.title}
+        className="min-w-[250px] md:min-w-0 cursor-pointer transition-shadow shadow-md hover:shadow-md"
+        onClick={() => router.push(stat.href)}
+      >
+        <GlowCard className="p-0 w-full max-h-40 rounded-lg overflow-hidden">
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium">{stat.title}</p>
+                <p className="text-3xl font-bold">{stat.value}</p>
+              </div>
+              <div className={`p-3 rounded-full ${stat.bgColor}`}>
+                <stat.icon className={`h-6 w-6 ${stat.color}`} />
+              </div>
             </div>
           </div>
-        </div>
-      </GlowCard>
-    </div>
-  ))}
+        </GlowCard>
+      </div>
+    ))}
+  </div>
+
+  {/* Tombol scroll bawah (mobile only) */}
+  <div className="flex justify-end gap-2 md:hidden">
+    <button
+      onClick={() => scroll("left")}
+      className="shadow-md p-2 rounded-full"
+    >
+      ◀
+    </button>
+    <button
+      onClick={() => scroll("right")}
+      className="shadow-md p-2 rounded-full"
+    >
+      ▶
+    </button>
+  </div>
 </div>
 
+
+
+
       {/* Quick Actions */}
-      <div className="mb-8">
+      <div className="mb-8 mt-8">
         <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {quickActions.map((action) => (
