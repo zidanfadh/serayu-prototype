@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { PO } from '@/lib/data';
+import { Button2 } from "@/components/ui/moving-border";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -33,12 +34,12 @@ export default function POPage() {
   );
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Purchase Orders</h1>
-        <Button onClick={() => router.push('/po/create')}>
-          Buat PO
-        </Button>
+        <Button2 className='cursor-pointer shadow-lg' onClick={() => router.push('/po/create')}>
+          + Purchase Order
+        </Button2>
       </div>
       
       <div className="flex items-center py-4">

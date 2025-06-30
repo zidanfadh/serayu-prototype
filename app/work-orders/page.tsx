@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { WorkOrder, ProductionPlan } from '@/lib/data';
+import { Button2 } from "@/components/ui/moving-border";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -157,13 +158,13 @@ export default function WorkOrdersPage() {
   });
 
   return (
-    <div className="flex justify-center-safe item-center py-10 mx-10">
+    <div className="flex justify-center-safe item-center mx-10">
       <div className="container mx-auto py-10">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Work Orders</h1>
-          <Button onClick={() => router.push('/work-orders/create')}>
-            Buat Work Order
-          </Button>
+          <Button2 className='cursor-pointer shadow-lg' onClick={() => router.push('/work-orders/create')}>
+            + Work Order
+          </Button2>
         </div>
         
         <div className="flex items-center py-4">

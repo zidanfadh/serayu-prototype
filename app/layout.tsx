@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ThemeSwitch } from '@/components/ui/theme-switch-button';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,26 +31,29 @@ const navigation = [
   { name: 'Reports', href: '/work-order-reports', icon: BarChart3 },
 ]
 
+
+
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const pathname = usePathname()
 
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="flex h-screen bg-gray-50">
+      <body className={`${inter.className} antialiased`}>
+        <div className="flex h-screen">
           {/* Sidebar */}
           <div className={`
-            fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out
+            fixed inset-y-0 left-0 z-50 w-64 shadow-lg transform transition-transform duration-300 ease-in-out
             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
             lg:translate-x-0 lg:static lg:inset-0
-          `}>
+          `} style={{ backgroundColor: 'var(--sidebar-bg)', color: 'var(--sidebar-text)' }}>
             <div className="flex items-center justify-between h-16 px-4 border-b">
-              <h2 className="text-xl font-semibold text-gray-800">Serayu ERP</h2>
+              <h2 className="text-xl font-semibold">Serayu ERP</h2>
+              <ThemeSwitch/>
               <Button
                 variant="ghost"
                 size="sm"
@@ -73,8 +77,8 @@ export default function RootLayout({
                       className={`
                         group flex items-center px-2 py-2 text-sm font-medium rounded-md
                         ${isActive
-                          ? 'bg-indigo-100 text-indigo-600'
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                          ? 'text-indigo-600'
+                          : 'text-gray-600 hover:text-gray-900'
                         }
                       `}
                       onClick={() => setSidebarOpen(false)}
@@ -96,7 +100,7 @@ export default function RootLayout({
           {/* Main content */}
           <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
             {/* Top bar */}
-            <div className="lg:hidden bg-white shadow-sm border-b">
+            <div className="lg:hidden shadow-sm border-b">
               <div className="flex items-center justify-between h-16 px-4">
                 <Button
                   variant="ghost"
@@ -120,7 +124,7 @@ export default function RootLayout({
         {/* Sidebar overlay */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 lg:hidden"
+            className="fixed inset-0 z-40 lg:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}

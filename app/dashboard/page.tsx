@@ -1,27 +1,6 @@
-// import Component from "@/components/home/table-dashboard";
-// import { RainbowButton } from "@/components/ui/rainbow-button";
-// import { ThemeSwitch } from "@/components/ui/theme-switch-button";
-
-// export default function dashboard() {
-//   return (
-//     <div>
-//       <div className="flex justify-center item-center">
-//         <h1 className="font-bold text-5xl mt-10">Dashboard</h1>
-//         <div className="flex justify-center items-center py-8">
-//     </div>
-//       </div>
-//     <div className="flex justify-center-safe item-center py-10 mx-10">
-//     <Component/>
-//     </div>
-//     </div>
-//   )
-// }
-
-//biar bisa deploy
-
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -35,8 +14,11 @@ import {
   TrendingUp,
   AlertTriangle 
 } from 'lucide-react';
+import { GlowCard } from '@/components/ui/magic-card';
+import { DefaultDemo } from '@/components/ui/dashboard-word';
 
-export default function Dashboard() {
+
+export function Dashboard() {
   const router = useRouter();
   const [stats, setStats] = useState({
     productionPlans: 0,
@@ -46,6 +28,15 @@ export default function Dashboard() {
     workOrderPlans: 0,
     reports: 0,
   });
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === "left" ? -300 : 300;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     // Load statistics from localStorage
@@ -161,47 +152,74 @@ export default function Dashboard() {
 
   return (
     <div className="p-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600">Welcome to Serayu ERP System</p>
+      <div className="py-10 mb-6 text-center">
+        <DefaultDemo/>
+        <p className="text-gray-600 mt-6">Welcome to Serayu ERP System</p>
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {statsCards.map((stat) => (
-          <Card 
-            key={stat.title}
-            className="cursor-pointer hover:shadow-md transition-shadow"
-            onClick={() => router.push(stat.href)}
-          >
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                  <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-                </div>
-                <div className={`p-3 rounded-full ${stat.bgColor}`}>
-                  <stat.icon className={`h-6 w-6 ${stat.color}`} />
-                </div>
+      <div>
+  {/* Card container */}
+  <div
+    ref={scrollRef}
+    className="flex gap-4 overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 mb-4 pb-10 scroll-smooth"
+  >
+    {statsCards.map((stat) => (
+      <div
+        key={stat.title}
+        className="min-w-[250px] md:min-w-0 cursor-pointer transition-shadow shadow-md hover:shadow-md"
+        onClick={() => router.push(stat.href)}
+      >
+        <GlowCard className="p-0 w-full max-h-40 rounded-lg overflow-hidden">
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium">{stat.title}</p>
+                <p className="text-3xl font-bold">{stat.value}</p>
               </div>
-            </CardContent>
-          </Card>
-        ))}
+              <div className={`p-3 rounded-full ${stat.bgColor}`}>
+                <stat.icon className={`h-6 w-6 ${stat.color}`} />
+              </div>
+            </div>
+          </div>
+        </GlowCard>
       </div>
+    ))}
+  </div>
+
+  {/* Tombol scroll bawah (mobile only) */}
+  <div className="flex justify-end gap-2 md:hidden">
+    <button
+      onClick={() => scroll("left")}
+      className="shadow-md p-2 rounded-full"
+    >
+      ◀
+    </button>
+    <button
+      onClick={() => scroll("right")}
+      className="shadow-md p-2 rounded-full"
+    >
+      ▶
+    </button>
+  </div>
+</div>
+
+
+
 
       {/* Quick Actions */}
-      <div className="mb-8">
+      <div className="mb-8 mt-8">
         <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {quickActions.map((action) => (
             <Card key={action.title} className="cursor-pointer hover:shadow-md transition-shadow">
               <CardContent className="p-4">
                 <div className="flex items-start space-x-3">
-                  <div className={`p-2 rounded-lg ${action.color} text-white`}>
+                  <div className={`p-2 rounded-lg ${action.color}`}>
                     <action.icon className="h-5 w-5" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-gray-900">{action.title}</h3>
+                    <h3 className="font-medium">{action.title}</h3>
                     <p className="text-sm text-gray-600">{action.description}</p>
                     <Button 
                       variant="outline" 
@@ -231,19 +249,19 @@ export default function Dashboard() {
           <CardContent>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Total Production Plans</span>
+                <span className="text-sm">Total Production Plans</span>
                 <span className="font-medium">{stats.productionPlans}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Active Work Orders</span>
+                <span className="text-sm">Active Work Orders</span>
                 <span className="font-medium">{stats.workOrders}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Scheduled Plans</span>
+                <span className="text-sm">Scheduled Plans</span>
                 <span className="font-medium">{stats.workOrderPlans}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Generated Reports</span>
+                <span className="text-sm">Generated Reports</span>
                 <span className="font-medium">{stats.reports}</span>
               </div>
             </div>
@@ -278,3 +296,5 @@ export default function Dashboard() {
     </div>
   );
 }
+
+export default Dashboard;

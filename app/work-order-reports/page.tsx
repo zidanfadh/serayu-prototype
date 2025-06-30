@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { WorkOrdersReport } from '@/lib/data';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Button2 } from "@/components/ui/moving-border";
 import {
   Table,
   TableBody,
@@ -159,19 +160,19 @@ export default function WorkOrderReportsPage() {
   });
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 mx-auto">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-2xl font-bold">Work Order Reports</h1>
           <p className="text-muted-foreground">Laporan work order plans berdasarkan periode</p>
         </div>
-        <Button 
+        <Button2 
           onClick={() => router.push('/work-order-reports/create')}
-          className="flex items-center gap-2"
+          className="cursor-pointer shadow-lg"
         >
-          <FileText className="h-4 w-4" />
+          <FileText className="h-4 w-4 mx-2" />
           Generate Report
-        </Button>
+        </Button2>
       </div>
       
       <div className="flex items-center py-4">

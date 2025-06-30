@@ -8,24 +8,35 @@
   --color-3: 210 100% 63%;
   --color-4: 195 100% 63%;
   --color-5: 90 100% 63%;
+  --sidebar-bg: #ffffff; /* light mode */
+  --sidebar-text: #000000;
 }
 
-@theme inline {
-  --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
- 
-  @keyframes rainbow {
-    0% {
-      background-position: 0%;
-    }
-    100% {
-      background-position: 200%;
-    }
-  }
-}
 
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+    --sidebar-bg: #1f1f1f; /* dark mode */
+  --sidebar-text: #f1f1f1;
+   --color-1: 0 100% 63%;
+  --color-2: 270 100% 63%;
+  --color-3: 210 100% 63%;
+  --color-4: 195 100% 63%;
+  --color-5: 90 100% 63%;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+.animate-rainbow {
+  animation: rainbow var(--speed, 2s) infinite linear;
+  background-size: 200% auto;
 }
 
 body {

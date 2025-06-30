@@ -33,7 +33,7 @@ export default function WorkOrderPlansPage() {
   );
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Work Order Plans</h1>
       </div>
