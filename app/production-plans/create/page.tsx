@@ -1,5 +1,4 @@
 'use client';
-//biar bisa deploy
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -8,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Product } from '@/lib/data';
+import { DropdownMenu } from "@/components/ui/dropdown-menu2";
+import { Pencil, Trash, Copy, Check } from "lucide-react";
 
 export default function CreateProductionPlanPage() {
   const router = useRouter();
@@ -34,7 +35,7 @@ export default function CreateProductionPlanPage() {
     const { name, value } = e.target;
     setForm({
       ...form,
-      [name]: ['stock_lalu', 'stock_akhir', 'stock_minimum', 'stock_maximum'].includes(name) 
+      [name]: ['stock_lalu', 'stock_akhir', 'stock_minimum', 'stock_maximum'].includes(name)
         ? Number(value) : value,
     });
   };
@@ -60,8 +61,8 @@ export default function CreateProductionPlanPage() {
   return (
     <div className="flex items-center justify-center p-10">
       <div className="sm:mx-auto sm:max-w-2xl w-full">
-        <h3 className="text-2xl font-semibold text-foreground">Buat Production Plan</h3>
-        
+        <h3 className="text-2xl font-semibold text-foreground text-shadow-md">Buat Production Plan</h3>
+
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
@@ -72,53 +73,51 @@ export default function CreateProductionPlanPage() {
                 required
                 value={form.company}
                 onChange={handleChange}
-                className="mt-2"
+                className="mt-2 shadow-cyan-500/50 rounded-xl border-b-4 inset-shadow-sm"
               />
             </div>
 
             <div>
               <Label htmlFor="kode_part">Kode Part</Label>
-              <select
-                id="kode_part"
-                name="kode_part"
-                required
-                value={form.kode_part}
-                onChange={handleChange}
-                className="w-full rounded-md border border-input px-3 py-2 mt-2"
-              >
-                <option value="">Pilih Kode Part</option>
-                {products.map((product) => (
-                  <option key={product.KODE_PART} value={product.KODE_PART}>
-                    {product.KODE_PART} - {product.NAMA_PART}
-                  </option>
-                ))}
-              </select>
+              <div className='mt-2 text-white shadow-lg shadow-cyan-500/50 rounded-xl'>
+                <DropdownMenu
+                  options={products.map((product) => ({
+                    label: `${product.KODE_PART} - ${product.NAMA_PART}`,
+                    onClick: () => {
+                      setForm((prev) => ({ ...prev, kode_part: product.KODE_PART }));
+                    },
+                    Icon:
+                      form.kode_part === product.KODE_PART ? (
+                        <Check className="h-4 w-4 text-green-500" />
+                      ) : null,
+                  }))}
+                >
+                  {form.kode_part
+                    ? `${form.kode_part} - ${products.find((p) => p.KODE_PART === form.kode_part)?.NAMA_PART || ""
+                    }`
+                    : "Pilih Kode Part"}
+                </DropdownMenu>
+              </div>
             </div>
 
             <div>
               <Label htmlFor="month">Bulan</Label>
-              <select
-                id="month"
-                name="month"
-                required
-                value={form.month}
-                onChange={handleChange}
-                className="w-full rounded-md border border-input px-3 py-2 mt-2"
-              >
-                <option value="">Pilih Bulan</option>
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-              </select>
+              <div className="mt-2 w-full text-white shadow-lg shadow-cyan-500/50 rounded-xl">
+                <DropdownMenu
+                  options={[
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                  ].map((month) => ({
+                    label: month,
+                    onClick: () => {
+                      setForm((prev) => ({ ...prev, month }));
+                    },
+                    Icon: form.month === month ? <Check className="h-4 w-4 text-green-500" /> : null,
+                  }))}
+                >
+                  {form.month || "Pilih Bulan"}
+                </DropdownMenu>
+              </div>
             </div>
 
             <div>
@@ -130,7 +129,7 @@ export default function CreateProductionPlanPage() {
                 required
                 value={form.year}
                 onChange={handleChange}
-                className="mt-2"
+                className="mt-2 shadow-cyan-500/50 rounded-xl border-b-4 inset-shadow-sm"
                 min="2024"
               />
             </div>
@@ -143,7 +142,7 @@ export default function CreateProductionPlanPage() {
                 name="stock_lalu"
                 value={form.stock_lalu}
                 onChange={handleChange}
-                className="mt-2"
+                className="mt-2 shadow-cyan-500/50 rounded-xl border-b-4 inset-shadow-sm"
               />
             </div>
 
@@ -156,7 +155,7 @@ export default function CreateProductionPlanPage() {
                 required
                 value={form.stock_akhir}
                 onChange={handleChange}
-                className="mt-2"
+                className="mt-2 shadow-cyan-500/50 rounded-xl border-b-4 inset-shadow-sm"
               />
             </div>
 
@@ -169,7 +168,7 @@ export default function CreateProductionPlanPage() {
                 required
                 value={form.stock_minimum}
                 onChange={handleChange}
-                className="mt-2"
+                className="mt-2 shadow-cyan-500/50 rounded-xl border-b-4 inset-shadow-sm"
               />
             </div>
 
@@ -182,7 +181,7 @@ export default function CreateProductionPlanPage() {
                 required
                 value={form.stock_maximum}
                 onChange={handleChange}
-                className="mt-2"
+                className="mt-2 shadow-cyan-500/50 rounded-xl border-b-4 inset-shadow-sm"
               />
             </div>
           </div>
