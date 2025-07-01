@@ -114,7 +114,7 @@ export default function WorkOrderReportsPage() {
             variant="outline" 
             size="sm"
             onClick={() => router.push(`/work-order-reports/${row.original.id}`)}
-            className="flex items-center gap-1"
+            className="flex items-center gap-1 cursor-pointer"
           >
             <Eye className="h-4 w-4" />
             View Report

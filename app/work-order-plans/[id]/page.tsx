@@ -92,7 +92,7 @@ export default function WorkOrderPlanDetailPage() {
     new Date(workOrderPlan.deadline_date) <= new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 md:max-w-6xl max-w-80">
       <Button 
         variant="ghost" 
         onClick={() => router.push('/work-order-plans')}
@@ -191,7 +191,7 @@ export default function WorkOrderPlanDetailPage() {
                 <div className="border-t pt-4">
                   <h3 className="font-semibold mb-3">Production Timeline</h3>
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center p-3 bg-blue-50 rounded">
+                    <div className="flex justify-between text-black items-center p-3 bg-blue-50 rounded">
                       <div>
                         <p className="font-medium">Production Start</p>
                         <p className="text-sm text-muted-foreground">
@@ -203,7 +203,7 @@ export default function WorkOrderPlanDetailPage() {
                       </div>
                     </div>
                     
-                    <div className="flex justify-between items-center p-3 bg-green-50 rounded">
+                    <div className="flex justify-between items-center p-3 text-black bg-green-50 rounded">
                       <div>
                         <p className="font-medium">Production End</p>
                         <p className="text-sm text-muted-foreground">
@@ -215,7 +215,7 @@ export default function WorkOrderPlanDetailPage() {
                       </div>
                     </div>
                     
-                    <div className="flex justify-between items-center p-3 bg-yellow-50 rounded">
+                    <div className="flex justify-between items-center p-3 text-black bg-yellow-50 rounded">
                       <div>
                         <p className="font-medium">Plating Period</p>
                         <p className="text-sm text-muted-foreground">
@@ -227,7 +227,7 @@ export default function WorkOrderPlanDetailPage() {
                       </div>
                     </div>
                     
-                    <div className={`flex justify-between items-center p-3 rounded ${isUrgent ? 'bg-red-50' : 'bg-purple-50'}`}>
+                    <div className={`flex text-black justify-between items-center p-3 rounded ${isUrgent ? 'bg-red-50' : 'bg-purple-50'}`}>
                       <div>
                         <p className="font-medium flex items-center gap-2">
                           <Clock className="h-4 w-4" />
@@ -269,7 +269,7 @@ export default function WorkOrderPlanDetailPage() {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="w-full"
+                    className="w-full cursor-pointer"
                     onClick={() => router.push(`/production-plans/${productionPlan.id}`)}
                   >
                     View Production Plan
@@ -298,7 +298,7 @@ export default function WorkOrderPlanDetailPage() {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="w-full"
+                    className="w-full cursor-pointer"
                     onClick={() => router.push(`/products/${product.KODE_PART}`)}
                   >
                     View Product
@@ -323,7 +323,7 @@ export default function WorkOrderPlanDetailPage() {
               </Button>
               <Button 
                 variant="outline" 
-                className="w-full"
+                className="w-full cursor-pointer"
                 onClick={() => router.push(`/work-order-reports/create?week=${workOrderPlan.week_number}&month=${workOrderPlan.month}&year=${workOrderPlan.year}`)}
               >
                 Generate Report

@@ -102,7 +102,7 @@ export default function ProductionPlanDetailPage() {
   }
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 md:max-w-6xl max-w-80">
       <Button 
         variant="ghost" 
         onClick={() => router.push('/production-plans')}
@@ -174,8 +174,9 @@ export default function ProductionPlanDetailPage() {
                 <Button 
                   size="sm"
                   onClick={() => router.push(`/po/create?production_plan_id=${productionPlan.id}`)}
+                  className="cursor-pointer"
                 >
-                  <Plus className="h-4 w-4 mr-2" />
+                  <Plus className="h-4 w-4 mr-2 cursor-pointer" />
                   Add PO
                 </Button>
               </div>
@@ -202,6 +203,7 @@ export default function ProductionPlanDetailPage() {
                             variant="outline" 
                             size="sm"
                             onClick={() => router.push(`/po/${po.id}`)}
+                            className='cursor-pointer'
                           >
                             Detail
                           </Button>
@@ -229,6 +231,7 @@ export default function ProductionPlanDetailPage() {
                 <Button 
                   size="sm"
                   onClick={() => router.push(`/work-orders/create?production_plan_id=${productionPlan.id}`)}
+                  className="cursor-pointer"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add WO
@@ -299,7 +302,7 @@ export default function ProductionPlanDetailPage() {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="w-full"
+                  className="w-full cursor-pointer"
                   onClick={() => router.push(`/products/${product.KODE_PART}`)}
                 >
                   View Product Details
@@ -340,7 +343,7 @@ export default function ProductionPlanDetailPage() {
             </CardHeader>
             <CardContent className="space-y-3">
               <Button 
-                className="w-full"
+                className="w-full cursor-pointer"
                 onClick={() => router.push(`/work-order-plans/create?production_plan_id=${productionPlan.id}`)}
               >
                 <FileText className="h-4 w-4 mr-2" />
